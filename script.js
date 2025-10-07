@@ -1,5 +1,7 @@
+/*========== Typed.js for Home Section Roles ==========*/
 var typed = new Typed(".multiple-text", {
-    strings: ["Game Developer", "Freelancer", "Footballer"],
+    // Focus on key programming roles
+    strings: ["Unity Game Developer", "Multiplayer Specialist"],
     typeSpeed: 100,
     backSpeed: 100,
     backDelay: 1000,
@@ -29,16 +31,18 @@ window.onscroll = () => {
         if(top >=offset && top < offset + height){
             navLinks.forEach(links => {
                links.classList.remove('active');
-                document.querySelector('header nav a[href*=' + id + ']').classList.add('active');
+               // Ensures the nav link for the current section is active
+               document.querySelector('header nav a[href*=' + id + ']').classList.add('active');
             });
         };
     });
+    
     /*========== sticky nav bar ==========*/
     let header = document.querySelector('header');
-    
     header.classList.toggle('sticky', window.scrollY > 100);
     
     /*========== remove toggle and navbar when click navbar link (scroll) ==========*/
+    // This logic ensures the menu closes when a link is clicked or on scroll
     menuIcon.classList.remove('bx-x');
     navbar.classList.remove('active');
 };
@@ -56,25 +60,37 @@ ScrollReveal().reveal('.home-img, .services-container, .portfolio-box, .contact 
 ScrollReveal().reveal('.home-content h1, .about-img', { origin: 'left' });
 ScrollReveal().reveal('.home-content p, .about-content', { origin: 'right' });
 
-function toggleReadMore(button) {
-    const layer = button.parentElement;
-    const shortText = layer.querySelector('.short-text');
-    const fullText = layer.querySelector('.full-text');
 
-    const isExpanded = fullText.classList.contains('show');
+/*========== NEW: MODAL LOGIC FOR PORTFOLIO DETAILS ==========*/
+const modal = document.getElementById('portfolio-modal');
 
-    if (isExpanded) {
-        fullText.classList.remove('show');
-        shortText.classList.add('show');
-        button.textContent = "Read More";
-    } else {
-        fullText.classList.add('show');
-        shortText.classList.remove('show');
-        button.textContent = "Read Less";
-    }
+/**
+ * Opens the project details modal and populates it with content.
+ * @param {string} title - The title of the project.
+ * @param {string} tags - The technology tags (e.g., Unity | C#).
+ * @param {string} description - The full description of the project.
+ */
+function openModal(title, tags, description) {
+    document.getElementById('modal-title').textContent = title;
+    document.getElementById('modal-tags').textContent = tags;
+    document.getElementById('modal-description').textContent = description;
+    
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden'; // Prevents scrolling behind the modal
 }
 
-// Show short text by default on page load
-document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll('.short-text').forEach(el => el.classList.add('show'));
-});
+/**
+ * Closes the project details modal.
+ */
+function closeModal() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Re-enable background scrolling
+}
+
+// Close the modal if the user clicks anywhere outside of the modal content
+window.onclick = function(event) {
+    if (event.target == modal) {
+        closeModal();
+    }
+}
+/*========== END MODAL LOGIC ==========*/
