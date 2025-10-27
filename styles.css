@@ -249,7 +249,10 @@ span {
 }
 
 
-/* Portfolio Section */
+/* ===============================
+   PORTFOLIO SECTION
+   =============================== */
+
 .portfolio {
     background: var(--second-bg-color);
 }
@@ -271,13 +274,22 @@ span {
     box-shadow: 0 0 1rem var(--bg-color);
     overflow: hidden;
     display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.portfolio-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 1.5rem var(--main-color);
+}
+
+/* Fixed image sizing for consistency */
 .portfolio-box img {
     width: 100%;
-    height: auto;
+    height: 220px; /* Keeps grid uniform */
     object-fit: cover;
-    transition: 0.5s ease;
+    transition: transform 0.5s ease;
+    border-radius: 2rem 2rem 0 0;
 }
 
 .portfolio-box:hover img {
@@ -291,7 +303,7 @@ span {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.2), var(--main-color));
+    background: linear-gradient(rgba(0, 0, 0, 0.25), var(--main-color));
     display: flex;
     justify-content: space-evenly; 
     align-items: center;
@@ -336,7 +348,7 @@ span {
     margin-bottom: 1rem;
 }
 
-/* Button Styling */
+/* Button Styling (unchanged) */
 .read-more-btn, .visit-btn {
     background-color: var(--bg-color); 
     border: none;
@@ -355,6 +367,12 @@ span {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 }
 
+/* Responsive adjustment */
+@media (max-width: 768px) {
+    .portfolio-box img {
+        height: 180px;
+    }
+}
 
 /* ------------------------------------- */
 /* MODAL STYLES FOR FULL DESCRIPTION */
